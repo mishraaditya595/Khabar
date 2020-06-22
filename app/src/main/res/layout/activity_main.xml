@@ -6,16 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/darkPrimary">
+    android:background="@color/white"
+    >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="@string/app_name"
-        android:background="@color/darkSecondary"
+        android:layout_height="48dp"
+        android:background="@android:color/holo_blue_dark"
         android:layout_marginBottom="5dp"
-        />
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/container"
@@ -28,14 +40,14 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/darkSecondary"
+        app:labelVisibilityMode="unlabeled"
+        android:background="@android:color/holo_blue_dark"
         app:itemIconTint="@color/white"
         app:menu="@menu/bottom_nav_menu"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:elevation="10dp"
         />
 
 </RelativeLayout>
