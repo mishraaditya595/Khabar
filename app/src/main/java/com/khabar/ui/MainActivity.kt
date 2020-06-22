@@ -11,19 +11,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var bottomNavigationView: BottomNavigationView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(app_toolbar)
-        initialiseFields()
-        loadFragment(HomeFragment())
+        setSupportActionBar(app_toolbar) //to setup the app's action bar
+        loadFragment(HomeFragment()) //to make home fragment as the default fragment
 
-        bottomNavigationView.setOnNavigationItemSelectedListener {
-            when(it.itemId)
-            {
+        bottom_navigation_view.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
                 R.id.home_item -> {
                     loadFragment(HomeFragment())
                     return@setOnNavigationItemSelectedListener true
@@ -43,11 +39,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        }
-
-    private fun initialiseFields() {
-        bottomNavigationView=findViewById(R.id.bottom_navigation_view)
     }
+
 
     private fun loadFragment(fragment: Fragment) {
         // load fragment
