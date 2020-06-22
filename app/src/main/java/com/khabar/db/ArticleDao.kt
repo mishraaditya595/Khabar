@@ -2,7 +2,7 @@ package com.khabar.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.khabar.Article
+import com.khabar.models.Article
 
 @Dao
 interface ArticleDao {

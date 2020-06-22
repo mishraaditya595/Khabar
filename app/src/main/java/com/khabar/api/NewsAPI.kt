@@ -1,6 +1,6 @@
 package com.khabar.api
 
-import com.khabar.NewsResponse
+import com.khabar.models.NewsResponse
 import com.khabar.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET

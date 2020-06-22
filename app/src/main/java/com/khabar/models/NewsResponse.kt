@@ -1,4 +1,6 @@
-package com.khabar
+package com.khabar.models
+
+import com.khabar.models.Article
 
 data class NewsResponse(
     val articles: List<Article>,

@@ -1,4 +1,4 @@
-package com.khabar
+package com.khabar.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
