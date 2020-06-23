@@ -1,12 +1,17 @@
 package com.khabar.ui.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.khabar.MainActivity
 import com.khabar.R
@@ -30,6 +35,16 @@ class HomeFragment : Fragment() {
         viewModel = (activity as MainActivity).viewModel
 
         setupRecyclerView()
+
+        val navController = Navigation.findNavController(context as Activity, R.id.fragment_main)
+
+        newsAdapater.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("article", it)
+            }
+            replaceFragment(ArticleFragment(),bundle)
+        }
+
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is Resource.Success -> {
@@ -68,4 +83,11 @@ class HomeFragment : Fragment() {
         home_pagination_PB.visibility = View.VISIBLE
     }
 
+    private fun replaceFragment(fragment: Fragment, bundle: Bundle) {
+        val transaction = fragmentManager?.beginTransaction()
+        val frag= fragment
+        frag.arguments = bundle
+        transaction?.add(R.id.fragment_main, frag)
+        transaction?.commit()
+    }
 }
