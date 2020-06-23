@@ -60,12 +60,12 @@ class HomeFragment : Fragment() {
 
     private fun hideProgressBar()
     {
-        pagination_PB.visibility = View.INVISIBLE
+        home_pagination_PB.visibility = View.INVISIBLE
     }
 
     private fun showProgressBar()
     {
-        pagination_PB.visibility = View.VISIBLE
+        home_pagination_PB.visibility = View.VISIBLE
     }
 
 }
