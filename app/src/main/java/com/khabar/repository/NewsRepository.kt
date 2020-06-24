@@ -2,6 +2,7 @@ package com.khabar.repository
 
 import com.khabar.api.RetrofitInstance
 import com.khabar.db.ArticleDatabase
+import com.khabar.models.Article
 
 class NewsRepository(val db: ArticleDatabase) {
     suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
@@ -9,4 +10,10 @@ class NewsRepository(val db: ArticleDatabase) {
 
     suspend fun searchNews(searchQuery: String, pageNumber: Int) =
         RetrofitInstance.api.searchForNews(searchQuery, pageNumber)
+
+    suspend fun upsert(article: Article) = db.getArticleDao().upsert(article)
+
+    fun getSavedNews() = db.getArticleDao().getAllArticles()
+
+    suspend fun deleteArticle(article: Article) = db.getArticleDao().deleteArticle(article)
 }

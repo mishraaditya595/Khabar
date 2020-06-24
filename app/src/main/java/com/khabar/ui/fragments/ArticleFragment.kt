@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.khabar.MainActivity
 import com.khabar.R
 import com.khabar.ui.NewsViewModel
@@ -30,11 +31,16 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
 
-        val articleFragmentArgs = articleFragmentArgs.article
+        val article = articleFragmentArgs.article
 
         webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(articleFragmentArgs.url)
+            loadUrl(article.url)
+        }
+
+        saved_button_fab.setOnClickListener {
+            viewModel.saveArticle(article)
+            Snackbar.make(view, "Article saved successfully", Snackbar.LENGTH_SHORT).show()
         }
     }
 
