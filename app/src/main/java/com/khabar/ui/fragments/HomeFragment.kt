@@ -1,11 +1,13 @@
 package com.khabar.ui.fragments
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
@@ -13,10 +15,13 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.khabar.MainActivity
 import com.khabar.R
 import com.khabar.adapters.NewsAdapter
+import com.khabar.ui.ArticleWebViewActivity
 import com.khabar.ui.NewsViewModel
+import com.khabar.util.Constants.Companion.QUERY_PAGE_SIZE
 import com.khabar.util.Resource
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -50,7 +55,14 @@ class HomeFragment : Fragment() {
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { newsResponse ->
-                        newsAdapater.differ.submitList(newsResponse.articles)
+                        newsAdapater.differ.submitList(newsResponse.articles.toList())
+                        val totalPages = newsResponse.totalResults / QUERY_PAGE_SIZE + 2
+                        isLastPage = viewModel.breakingNewsPage == totalPages
+
+                        if (isLastPage)
+                        {
+                            home_fragment_rv.setPadding(0,0,0,0)
+                        }
                     }
                 }
                 is Resource.Error -> {
@@ -64,30 +76,75 @@ class HomeFragment : Fragment() {
         })
     }
 
+    var isLoading: Boolean = false
+    var isLastPage: Boolean = false
+    var isScrolling: Boolean = false
+
+    val scrollListener = object: RecyclerView.OnScrollListener(){
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+
+            val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+            val visibleItemCount = layoutManager.childCount
+            val totalItemCount = layoutManager.itemCount
+
+            val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
+            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning = firstVisibleItemPosition >= 0
+            val isTotalMoreThanVisible = totalItemCount >= QUERY_PAGE_SIZE
+            val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
+                    isTotalMoreThanVisible && isScrolling
+
+            if (shouldPaginate){
+                viewModel.getBreakingNews("in")
+                isScrolling = false
+            }
+        }
+
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if(newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                isScrolling = true
+            }
+        }
+    }
+
     private fun setupRecyclerView()
     {
         newsAdapater = NewsAdapter()
         home_fragment_rv.apply {
             adapter = newsAdapater
             layoutManager = LinearLayoutManager(activity)
+            addOnScrollListener(this@HomeFragment.scrollListener)
         }
     }
 
     private fun hideProgressBar()
     {
         home_pagination_PB.visibility = View.INVISIBLE
+        isLoading = false
     }
 
     private fun showProgressBar()
     {
         home_pagination_PB.visibility = View.VISIBLE
+        isLoading = true
     }
 
     private fun replaceFragment(fragment: Fragment, bundle: Bundle) {
         val transaction = fragmentManager?.beginTransaction()
         val frag= fragment
         frag.arguments = bundle
-        transaction?.add(R.id.fragment_main, frag)
+        transaction?.replace(R.id.fragment_main, frag)
         transaction?.commit()
+    }
+
+    private fun replaceActivity(activity: Activity, bundle: Bundle){
+        activity?.let{
+            val act = activity
+            val intent = Intent (it, ArticleWebViewActivity::class.java)
+            it.startActivity(intent)
+        }
     }
 }
