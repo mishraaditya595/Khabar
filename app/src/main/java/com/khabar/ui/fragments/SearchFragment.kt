@@ -96,8 +96,8 @@ class SearchFragment : Fragment() {
         val transaction = fragmentManager?.beginTransaction()
         val frag= articleFragment
         frag.arguments = bundle
-        transaction?.replace(R.id.fragment_main, frag)
-        transaction?.commit()
+        transaction?.replace(R.id.container, frag)
+        transaction?.addToBackStack(null)?.commit()
     }
 
     var isLoading: Boolean = false
