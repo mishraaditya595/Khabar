@@ -31,6 +31,10 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
 
+        webview_PB.visibility = View.VISIBLE
+
+        Snackbar.make(view, "Loading news article", Snackbar.LENGTH_LONG).show()
+
         val article = articleFragmentArgs.article
 
         webView.apply {

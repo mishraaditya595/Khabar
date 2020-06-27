@@ -136,8 +136,8 @@ class HomeFragment : Fragment() {
         val transaction = fragmentManager?.beginTransaction()
         val frag= fragment
         frag.arguments = bundle
-        transaction?.replace(R.id.fragment_main, frag)
-        transaction?.commit()
+        transaction?.replace(R.id.container, frag)
+        transaction?.addToBackStack(null)?.commit()
     }
 
     private fun replaceActivity(activity: Activity, bundle: Bundle){

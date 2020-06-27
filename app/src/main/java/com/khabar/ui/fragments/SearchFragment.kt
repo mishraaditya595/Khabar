@@ -50,10 +50,7 @@ class SearchFragment : Fragment() {
             val bundle = Bundle().apply {
                 putSerializable("article", it)
             }
-            findNavController().navigate(
-                R.id.action_searchFragment_to_articleFragment,
-                bundle
-            )
+            replaceFragment(ArticleFragment(),bundle)
         }
 
         var job: Job? = null
@@ -80,7 +77,7 @@ class SearchFragment : Fragment() {
 
                         if (isLastPage)
                         {
-                            home_fragment_rv.setPadding(0,0,0,0)
+                            home_fragment_rv?.setPadding(0,0,0,0)
                         }
                     }
                 }
@@ -93,6 +90,14 @@ class SearchFragment : Fragment() {
                 is Resource.Loading -> { showProgressBar() }
             }
         })
+    }
+
+    private fun replaceFragment(articleFragment: ArticleFragment, bundle: Bundle) {
+        val transaction = fragmentManager?.beginTransaction()
+        val frag= articleFragment
+        frag.arguments = bundle
+        transaction?.replace(R.id.fragment_main, frag)
+        transaction?.commit()
     }
 
     var isLoading: Boolean = false
