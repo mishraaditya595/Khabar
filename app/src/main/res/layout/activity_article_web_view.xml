@@ -19,11 +19,9 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_favorite_24"
         app:fabSize="normal"
-        android:layout_marginBottom="25dp"
-        android:layout_marginRight="25dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#100F0F"
+        android:backgroundTint="#28B0E3"
         />
 
 

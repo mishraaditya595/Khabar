@@ -57,7 +57,6 @@
         android:background="@android:color/holo_blue_dark"
         app:itemIconTint="@color/white"
         app:menu="@menu/bottom_nav_menu"
-        android:layout_marginTop="2dp"
         android:elevation="10dp"
         />
 
