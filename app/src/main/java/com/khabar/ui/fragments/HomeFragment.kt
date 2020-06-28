@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(activity, "Error: $message ", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Error: $message ", Toast.LENGTH_LONG).show()
                     }
                 }
                 is Resource.Loading -> { showProgressBar() }
