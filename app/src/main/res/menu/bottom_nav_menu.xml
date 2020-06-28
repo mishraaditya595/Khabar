@@ -6,15 +6,21 @@
         android:icon="@drawable/ic_local_fire_department_black_24dp"
         />
     <item
+        android:id="@+id/location_based_news_item"
+        android:title="Location Based News"
+        android:icon="@drawable/ic_place_black_24dp"
+        />
+    <item
         android:id="@+id/search_item"
         android:title="Search Articles"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/ic_find_replace_black_24dp"
         />
     <item
         android:id="@+id/saved_news_item"
         android:title="Saved Articles"
         android:icon="@drawable/ic_baseline_save_alt_24"
         />
+
 
 
 </menu>

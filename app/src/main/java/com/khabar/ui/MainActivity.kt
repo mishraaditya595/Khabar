@@ -11,6 +11,7 @@ import com.khabar.ui.fragments.SearchFragment
 import com.khabar.repository.NewsRepository
 import com.khabar.ui.NewsViewModel
 import com.khabar.ui.NewsViewModelProviderFactory
+import com.khabar.ui.fragments.LocationBasedNewsFraagment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +33,11 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.home_item -> {
                     loadFragment(HomeFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.location_based_news_item -> {
+                    loadFragment(LocationBasedNewsFraagment())
                     return@setOnNavigationItemSelectedListener true
                 }
 
