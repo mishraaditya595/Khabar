@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "903066228484",
+    "firebase_url": "https://khabar-97313.firebaseio.com",
+    "project_id": "khabar-97313",
+    "storage_bucket": "khabar-97313.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903066228484:android:b2d3384729818f18046251",
+        "android_client_info": {
+          "package_name": "com.khabar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903066228484-uskbngkkh21ghqittu1i1f3qfokdai3n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.khabar",
+            "certificate_hash": "6599ad5cc1a7db65fc6d1848249f57b24b2ee203"
+          }
+        },
+        {
+          "client_id": "903066228484-ainjsbk6v84p8fnej7abdbr84vhn9lvo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8qNlooqyyDyqdmva1vRvkflKyX-OAXjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903066228484-ainjsbk6v84p8fnej7abdbr84vhn9lvo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
