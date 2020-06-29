@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: NewsViewModel
-    lateinit var mAdView: AdView
+    private lateinit var mAdView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
