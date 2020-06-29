@@ -91,7 +91,7 @@ class SavedNewsFragment : Fragment() {
         val transaction = fragmentManager?.beginTransaction()
         val frag= fragment
         frag.arguments = bundle
-        transaction?.add(R.id.fragment_main, frag)
+        transaction?.add(R.id.container, frag)
         transaction?.commit()
     }
 

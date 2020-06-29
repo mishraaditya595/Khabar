@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.2.2'
 
     //GMS
+    compile 'com.google.android.gms:play-services-auth:18.0.0'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
 

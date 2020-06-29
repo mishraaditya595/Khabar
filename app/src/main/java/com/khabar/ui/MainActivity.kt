@@ -3,6 +3,8 @@ package com.khabar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +17,7 @@ import com.khabar.repository.NewsRepository
 import com.khabar.ui.LoginActivity
 import com.khabar.ui.NewsViewModel
 import com.khabar.ui.NewsViewModelProviderFactory
+import com.khabar.ui.SettingsActivity
 import com.khabar.ui.fragments.LocationBasedNewsFraagment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,18 +26,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: NewsViewModel
     lateinit var firebaseAuth: FirebaseAuth
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        val firebaseUser = firebaseAuth.currentUser
-
-        firebaseUser?.let {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
 
         val newsRepository = NewsRepository(ArticleDatabase(this))
         val viewModelProviderFactory = NewsViewModelProviderFactory(application, newsRepository)
@@ -73,12 +69,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun loadFragment(fragment: Fragment) {
         // load fragment
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+            }
+        }
+        return true
     }
 }

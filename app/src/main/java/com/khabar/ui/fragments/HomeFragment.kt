@@ -41,8 +41,6 @@ class HomeFragment : Fragment() {
 
         setupRecyclerView()
 
-        val navController = Navigation.findNavController(context as Activity, R.id.fragment_main)
-
         newsAdapater.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", it)

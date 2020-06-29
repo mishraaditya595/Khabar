@@ -15,6 +15,7 @@
         android:layout_height="48dp"
         android:background="@android:color/holo_blue_dark"
         android:layout_marginBottom="5dp"
+        app:menu="@menu/toolbar_menu"
         >
 
         <TextView
@@ -36,15 +37,6 @@
         android:layout_above="@+id/bottom_navigation_view"
         android:layout_below="@id/app_toolbar"
         >
-
-        <fragment
-            android:id="@+id/fragment_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph"
-            />
 
     </FrameLayout>
 
