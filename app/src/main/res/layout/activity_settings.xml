@@ -124,4 +124,22 @@
             />
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/news_update_msg_cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/futurefeature_CV"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trending news gets updated every hour automatically."
+            android:textColor="@color/darkPrimary"
+            android:background="@color/white"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            android:padding="10dp"
+            />
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

@@ -7,6 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.khabar.db.ArticleDatabase
@@ -19,18 +23,24 @@ import com.khabar.ui.NewsViewModel
 import com.khabar.ui.NewsViewModelProviderFactory
 import com.khabar.ui.SettingsActivity
 import com.khabar.ui.fragments.LocationBasedNewsFraagment
+import com.khabar.util.Constants.Companion.ADMOB_AD_UNIT_ID
+import com.khabar.util.Constants.Companion.ADMOB_APP_ID
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: NewsViewModel
-    lateinit var firebaseAuth: FirebaseAuth
+    lateinit var mAdView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        firebaseAuth = FirebaseAuth.getInstance()
+        mAdView = findViewById(R.id.adView)
+
+        MobileAds.initialize(this)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         val newsRepository = NewsRepository(ArticleDatabase(this))
         val viewModelProviderFactory = NewsViewModelProviderFactory(application, newsRepository)
@@ -65,7 +75,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
 
     }
 

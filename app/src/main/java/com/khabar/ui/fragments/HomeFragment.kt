@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
                     hideProgressBar()
                     response.data?.let { newsResponse ->
                         newsAdapater.differ.submitList(newsResponse.articles.toList())
-                        val totalPages = newsResponse.totalResults / QUERY_PAGE_SIZE + 2
+                        val totalPages = newsResponse.totalResults / QUERY_PAGE_SIZE + 10
                         isLastPage = viewModel.breakingNewsPage == totalPages
 
                         if (isLastPage)
