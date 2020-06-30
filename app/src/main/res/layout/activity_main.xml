@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@android:color/holo_blue_dark"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="1dp"
         app:menu="@menu/toolbar_menu"
         >
 
@@ -53,8 +53,8 @@
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
         android:layout_above="@+id/bottom_navigation_view"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
