@@ -82,7 +82,7 @@
         <Switch
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="#D6CECE"
             android:text="Dark Mode"
             android:textColor="@color/darkPrimary"
             android:padding="10dp"
