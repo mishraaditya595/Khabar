@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:903066228484:android:b2d3384729818f18046251",
         "android_client_info": {
-          "package_name": "com.khabar"
+          "package_name": "com.vob"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "903066228484-uskbngkkh21ghqittu1i1f3qfokdai3n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.khabar",
+            "package_name": "com.vob",
             "certificate_hash": "6599ad5cc1a7db65fc6d1848249f57b24b2ee203"
           }
         },
