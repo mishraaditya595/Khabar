@@ -117,13 +117,13 @@ class TrendingNewsFragment : Fragment() {
 
     private fun hideProgressBar()
     {
-        home_pagination_PB.visibility = View.INVISIBLE
+        trending_pagination_PB.visibility = View.INVISIBLE
         isLoading = false
     }
 
     private fun showProgressBar()
     {
-        home_pagination_PB.visibility = View.VISIBLE
+        trending_pagination_PB.visibility = View.VISIBLE
         isLoading = true
     }
 

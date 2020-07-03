@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import com.vob.MainActivity
 import com.vob.R
 import com.vob.adapters.NewsAdapter
+import com.vob.adapters.TabAdapter
 import com.vob.ui.ArticleWebViewActivity
 import com.vob.ui.NewsViewModel
 import com.vob.util.Constants.Companion.QUERY_PAGE_SIZE
@@ -40,6 +41,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
 
+        val context = (activity as MainActivity)
+
         tablayout_home.addTab(tablayout_home.newTab().setText("Trending"))
         tablayout_home.addTab(tablayout_home.newTab().setText("General"))
         tablayout_home.addTab(tablayout_home.newTab().setText("Business"))
@@ -48,7 +51,23 @@ class HomeFragment : Fragment() {
         tablayout_home.addTab(tablayout_home.newTab().setText("Technology"))
         tablayout_home.addTab(tablayout_home.newTab().setText("Science"))
         tablayout_home.addTab(tablayout_home.newTab().setText("Sports"))
-        tablayout_home.tabGravity = TabLayout.GRAVITY_FILL
+
+        //tablayout_home.tabGravity = TabLayout.GRAVITY_FILL
+
+        val adapter = TabAdapter(context.applicationContext, context.supportFragmentManager, tablayout_home.tabCount)
+        viewpager_home.adapter = adapter
+
+        viewpager_home.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tablayout_home))
+
+        tablayout_home.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewpager_home.currentItem = tab?.position!!
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
 
 
         /*setupRecyclerView()

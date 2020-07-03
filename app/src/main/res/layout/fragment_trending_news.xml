@@ -14,4 +14,15 @@
         android:layout_below="@+id/tablayout_home"
         />
 
+    <ProgressBar
+        android:id="@+id/trending_pagination_PB"
+        style="?attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        />
+
 </RelativeLayout>
