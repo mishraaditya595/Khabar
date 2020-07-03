@@ -13,19 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@android:color/holo_blue_dark"
-        android:layout_marginBottom="1dp"
         app:menu="@menu/toolbar_menu"
+        app:title="@string/app_name"
         >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            />
 
     </androidx.appcompat.widget.Toolbar>
 
