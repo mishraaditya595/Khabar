@@ -1,5 +1,6 @@
 package com.vob.ui.fragments
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
+import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -131,7 +133,8 @@ class TrendingNewsFragment : Fragment() {
         val transaction = fragmentManager?.beginTransaction()
         val frag= fragment
         frag.arguments = bundle
-        transaction?.replace(R.id.container, frag)
-        transaction?.addToBackStack(null)?.commit()
+        transaction?.replace(R.id.container, frag, "Trending News Fragment")
+        transaction?.addToBackStack("Trending News Fragment")?.commit()
     }
+
 }

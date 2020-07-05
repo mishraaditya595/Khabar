@@ -50,9 +50,7 @@ class HomeFragment : Fragment() {
         tablayout_home.addTab(tablayout_home.newTab().setText("Entertainment"))
         tablayout_home.addTab(tablayout_home.newTab().setText("Technology"))
         tablayout_home.addTab(tablayout_home.newTab().setText("Science"))
-        tablayout_home.addTab(tablayout_home.newTab().setText("Sports"))
-
-        //tablayout_home.tabGravity = TabLayout.GRAVITY_FILL
+        tablayout_home.addTab(tablayout_home.newTab().setText("Health"))
 
         val adapter = TabAdapter(context.applicationContext, context.supportFragmentManager, tablayout_home.tabCount)
         viewpager_home.adapter = adapter

@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.HomeFragment"
-    android:background="@color/white"
-    >
+    android:background="@color/white">
     
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_home"
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="@android:color/holo_blue_dark"
+        app:tabMode="scrollable"
         />
     
     <androidx.viewpager.widget.ViewPager
@@ -20,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_below="@+id/tablayout_home"
         />
 
 </RelativeLayout>
