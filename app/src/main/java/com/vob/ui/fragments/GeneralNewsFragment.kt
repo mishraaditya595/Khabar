@@ -1,6 +1,5 @@
 package com.vob.ui.fragments
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
-import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,17 +16,18 @@ import com.vob.adapters.NewsAdapter
 import com.vob.ui.NewsViewModel
 import com.vob.util.Constants
 import com.vob.util.Resource
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_general_news.*
 import kotlinx.android.synthetic.main.fragment_trending_news.*
 
 
-class TrendingNewsFragment : Fragment() {
+class GeneralNewsFragment : Fragment() {
+
     lateinit var viewModel: NewsViewModel
     lateinit var newsAdapater: NewsAdapter
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_trending_news, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_general_news, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,14 +43,15 @@ class TrendingNewsFragment : Fragment() {
             replaceFragment(ArticleFragment(),bundle)
         }
 
-        viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
+
+        viewModel.generalNews.observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is Resource.Success -> {
                     hideProgressBar()
                     response.data?.let { newsResponse ->
                         newsAdapater.differ.submitList(newsResponse.articles.toList())
                         val totalPages = newsResponse.totalResults / Constants.QUERY_PAGE_SIZE + 10
-                        isLastPage = viewModel.breakingNewsPage == totalPages
+                        isLastPage = viewModel.generalNewsPage == totalPages
 
                         if (isLastPage)
                         {
@@ -68,14 +68,15 @@ class TrendingNewsFragment : Fragment() {
                 is Resource.Loading -> { showProgressBar() }
             }
         })
+
     }
 
     private fun setupRecyclerView() {
         newsAdapater = NewsAdapter()
-        trending_fragment_rv.apply {
+        general_fragment_rv.apply {
             adapter = newsAdapater
             layoutManager = LinearLayoutManager(activity)
-            addOnScrollListener(this@TrendingNewsFragment.scrollListener)
+            addOnScrollListener(this@GeneralNewsFragment.scrollListener)
         }
     }
 
@@ -100,7 +101,7 @@ class TrendingNewsFragment : Fragment() {
                     isTotalMoreThanVisible && isScrolling
 
             if (shouldPaginate) {
-                viewModel.getBreakingNews("in")
+                viewModel.getGeneralNews("in", "general")
                 isScrolling = false
             }
         }
@@ -132,5 +133,6 @@ class TrendingNewsFragment : Fragment() {
         transaction?.replace(R.id.container, frag, "Trending News Fragment")
         transaction?.addToBackStack("Trending News Fragment")?.commit()
     }
+
 
 }

@@ -28,6 +28,10 @@ class NewsViewModel(val app: Application,val newsRepository: NewsRepository) : A
     var searchNewsPage = 1
     var searchNewsResponse: NewsResponse? = null
 
+    val generalNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    var generalNewsPage = 1
+    var generalNewsResponse: NewsResponse? = null
+
 
     init {
         getBreakingNews("in")
@@ -39,6 +43,10 @@ class NewsViewModel(val app: Application,val newsRepository: NewsRepository) : A
 
     fun searchNews(searchQuery: String) = viewModelScope.launch {
         safeSearchNewsCall(searchQuery)
+    }
+
+    fun getGeneralNews(countryCode: String, category:String) = viewModelScope.launch {
+        safeGeneralNewsCall(countryCode, category)
     }
 
     private fun handleBreakingNewsResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
@@ -69,6 +77,22 @@ class NewsViewModel(val app: Application,val newsRepository: NewsRepository) : A
                     oldArticles?.addAll(newArticles)
                 }
                 return Resource.Success(searchNewsResponse?:resultResponse)
+            }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleGeneralNewsResponse(response: Response<NewsResponse>): Resource<NewsResponse> {
+        if (response.isSuccessful)
+            response.body()?.let { resultResponse ->
+                generalNewsPage++
+                if (generalNewsResponse == null){
+                    generalNewsResponse = resultResponse
+                } else {
+                    val oldArticles = generalNewsResponse?.articles
+                    val newArticles = resultResponse.articles
+                    oldArticles?.addAll(newArticles)
+                }
+                return Resource.Success(generalNewsResponse?:resultResponse)
             }
         return Resource.Error(response.message())
     }
@@ -113,6 +137,23 @@ class NewsViewModel(val app: Application,val newsRepository: NewsRepository) : A
             when(t) {
                 is IOException -> searchNews.postValue(Resource.Error("Network Failure"))
                 else -> searchNews.postValue(Resource.Error("Conversion Error"))
+            }
+        }
+    }
+
+    private suspend fun safeGeneralNewsCall(countryCode: String, category: String){
+        breakingNews.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = newsRepository.getGeneralNews(countryCode, generalNewsPage, category)
+                generalNews.postValue(handleGeneralNewsResponse(response))
+            } else {
+                generalNews.postValue(Resource.Error("No internet connection"))
+            }
+        } catch (t: Throwable) {
+            when(t) {
+                is IOException -> generalNews.postValue(Resource.Error("Network Failure"))
+                else -> generalNews.postValue(Resource.Error("Conversion Error"))
             }
         }
     }

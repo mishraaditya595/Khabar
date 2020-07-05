@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.vob.ui.fragments.GeneralNewsFragment
 import com.vob.ui.fragments.HomeFragment
 import com.vob.ui.fragments.TrendingNewsFragment
 
@@ -14,7 +15,7 @@ class TabAdapter(
     override fun getItem(position: Int): Fragment {
         when(position){
             0 -> { return TrendingNewsFragment() }
-            1 -> {}
+            1 -> { return GeneralNewsFragment() }
             2 -> {}
             3 -> {}
             4 -> {}
