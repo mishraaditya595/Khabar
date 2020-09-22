@@ -12,3 +12,4 @@
 /captures
 .externalNativeBuild
 .cxx
+/src/main/java/com/vob/util/Constants.kt
